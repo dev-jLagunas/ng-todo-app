@@ -5,3 +5,28 @@ TAILWIND CONFIG
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/**************************************************************
+RESET
+***************************************************************/
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/**************************************************************
+GLOBAL STYLES
+***************************************************************/
+body {
+  width: 90vw;
+  margin-inline: auto;
+}
+
+@media (width >= 768px) {
+  body {
+    width: 75vw;
+  }
+}
