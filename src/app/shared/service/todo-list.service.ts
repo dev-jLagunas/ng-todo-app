@@ -20,8 +20,34 @@ export class TodoListService {
     };
 
     this.#todoList.set([...this.#todoList(), newTask]);
+  }
 
-    console.log(this.#todoList());
+  deleteTodoItem(id: string) {
+    const updatedList = this.#todoList().filter((todo) => todo.id !== id);
+    this.#todoList.set(updatedList);
+  }
+
+  editTodoItem(id: string, updatedText: string) {
+    const updatedList = this.#todoList().map((todo) =>
+      todo.id === id
+        ? { ...todo, tasktext: updatedText, isEditing: false }
+        : todo
+    );
+
+    this.#todoList.set(updatedList);
+  }
+
+  toggleCompleted(id: string) {
+    const updatedList = this.#todoList().map((todo) =>
+      todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
+    );
+
+    this.#todoList.set(updatedList);
+  }
+
+  clearCompletedItems() {
+    const updatedList = this.#todoList().filter((todo) => !todo.isCompleted);
+    this.#todoList.set(updatedList);
   }
 
   private generateUniqueId(): string {

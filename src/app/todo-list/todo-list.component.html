@@ -1,1 +1,37 @@
-<p>todo-list works!</p>
+<article>
+  @if (!todoList().length) {
+  <p>list is empty</p>
+  } @else {
+  <ul>
+    @for (todo of todoList(); track todo.id) {
+    <li class="border-2 flex justify-between items-center gap-2">
+      <input
+        type="checkbox"
+        (change)="toggleComplete(todo.id)"
+        [checked]="todo.isCompleted"
+      />
+      @if (!todo.isEditing) {
+      <span [class.task-completed]="todo.isCompleted">{{ todo.taskText }}</span>
+      } @else if (todo.isEditing) {
+      <input
+        type="text"
+        [(ngModel)]="todo.taskText"
+        (keyup.enter)="editTodo(todo.id, todo.taskText)"
+      />
+      }
+
+      <div>
+        <button (click)="todo.isEditing = !todo.isEditing">
+          {{ todo.isEditing ? "Cancel" : "Edit" }}
+        </button>
+        <button (click)="deleteTodo(todo.id)">Delete</button>
+      </div>
+    </li>
+    }
+  </ul>
+  }
+  <section>
+    <p>{{ todoList().length }} items left</p>
+    <p (click)="clearCompleted()">Clear Completed</p>
+  </section>
+</article>
