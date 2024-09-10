@@ -1,5 +1,5 @@
-<article class="w-max mx-auto mt-14">
-  <form (ngSubmit)="onSubmit($event)">
+<article class="w-max mx-auto mt-8">
+  <form (ngSubmit)="onSubmit($event)" class="flex flex-col">
     <label for="todo-input" class="sr-only">Todo Input</label>
     <input
       type="text"
@@ -11,5 +11,11 @@
       [(ngModel)]="taskText"
       (keyup.enter)="onSubmit($event)"
     />
+    <button
+      class="text-slate-50 border rounded-md px-3 w-max mt-2 mx-auto text-sm"
+      (click)="onSubmit($event)"
+    >
+      Add
+    </button>
   </form>
 </article>

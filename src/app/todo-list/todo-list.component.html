@@ -65,7 +65,7 @@
 
   <!-- List Footer Section -->
   <section
-    class="flex justify-between items-center px-4 py-4 border-t-4 border-double mt-8 border-slate-400"
+    class="flex justify-between items-center flex-col gap-2 px-4 md:flex-row py-4 border-t-4 border-double mt-8 border-slate-400"
   >
     <p class="text-sm">
       Items Remaining:
@@ -75,7 +75,7 @@
     </p>
     <p
       (click)="clearCompleted()"
-      class="border px-2 hover:cursor-pointer rounded-md border-slate-400 py-1"
+      class="border px-2 hover:cursor-pointer rounded-md border-slate-400 py-1 text-center text-sm"
     >
       Clear Completed
     </p>
