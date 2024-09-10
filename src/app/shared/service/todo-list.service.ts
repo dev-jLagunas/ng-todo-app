@@ -50,6 +50,10 @@ export class TodoListService {
     this.#todoList.set(updatedList);
   }
 
+  reorderTodoList(updatedList: TodoItem[]) {
+    this.#todoList.set(updatedList);
+  }
+
   private generateUniqueId(): string {
     return Math.random().toString(36).slice(2, 11);
   }

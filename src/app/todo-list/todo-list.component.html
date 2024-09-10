@@ -2,9 +2,9 @@
   @if (!todoList().length) {
   <p>list is empty</p>
   } @else {
-  <ul>
+  <ul cdkDropList (cdkDropListDropped)="drop($event)">
     @for (todo of todoList(); track todo.id) {
-    <li class="border-2 flex justify-between items-center gap-2">
+    <li class="border-2 flex justify-between items-center gap-2" cdkDrag>
       <input
         type="checkbox"
         (change)="toggleComplete(todo.id)"

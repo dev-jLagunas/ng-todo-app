@@ -2,11 +2,18 @@ import { Component, inject, Signal } from '@angular/core';
 import { TodoListService } from '../shared/service/todo-list.service';
 import { TodoItem } from '../shared/interfaces/todo-item';
 import { FormsModule } from '@angular/forms';
+import {
+  CdkDragDrop,
+  CdkDropList,
+  CdkDrag,
+  moveItemInArray,
+  DragDropModule,
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-todo-list',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CdkDrag, CdkDropList, DragDropModule],
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.css',
 })
@@ -32,5 +39,10 @@ export class TodoListComponent {
 
   clearCompleted() {
     this.todoListService.clearCompletedItems();
+  }
+
+  drop(event: CdkDragDrop<TodoItem[]>) {
+    moveItemInArray(this.todoList(), event.previousIndex, event.currentIndex);
+    this.todoListService.reorderTodoList(this.todoList());
   }
 }
