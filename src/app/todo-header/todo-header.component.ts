@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ColorThemeService } from '../shared/service/color-theme.service';
 
 @Component({
   selector: 'app-todo-header',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
   templateUrl: './todo-header.component.html',
   styleUrl: './todo-header.component.css',
 })
-export class TodoHeaderComponent {}
+export class TodoHeaderComponent {
+  themeService = inject(ColorThemeService);
+
+  toggleTheme() {
+    this.themeService.toggleTheme();
+  }
+}
