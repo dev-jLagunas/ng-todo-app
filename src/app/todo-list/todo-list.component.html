@@ -1,16 +1,16 @@
 <article class="rounded-t-md bg-slate-800 text-slate-50 h-max mt-4">
   <!-- No items in the todo list display -->
   @if (!todoList().length) {
-  <p class="text-center py-4 text-2xl tracking-widest">List is empty</p>
+  <p class="text-center py-4 text-xl tracking-widest">List is empty</p>
   } @else {
   <!-- No completed items display -->
   @if (currentFilter === 'completed' && !filteredTodos.length) {
-  <p class="text-center py-4 text-2xl tracking-widest">
+  <p class="text-center py-4 text-xl tracking-widest">
     No completed items yet, don't give up!
   </p>
   } @else if (currentFilter === 'active' && !filteredTodos.length) {
   <!-- No active items display-->
-  <p class="text-center py-4 text-2xl tracking-widest">
+  <p class="text-center py-4 text-xl tracking-widest">
     Currently no active items
   </p>
   } @else {

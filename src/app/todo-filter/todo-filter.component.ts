@@ -14,4 +14,8 @@ export class TodoFilterComponent {
   applyFilter(filter: 'all' | 'active' | 'completed') {
     this.todoListService.setFilter(filter);
   }
+
+  get currentFilter() {
+    return this.todoListService.currentFilter;
+  }
 }
