@@ -45,4 +45,12 @@ export class TodoListComponent {
     moveItemInArray(this.todoList(), event.previousIndex, event.currentIndex);
     this.todoListService.reorderTodoList(this.todoList());
   }
+
+  get incompleteCount(): number {
+    return this.todoList().filter((todo) => !todo.isCompleted).length;
+  }
+
+  get filteredTodos() {
+    return this.todoListService.filteredTodoList();
+  }
 }

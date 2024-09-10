@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, computed } from '@angular/core';
 import { TodoItem } from '../interfaces/todo-item';
 
 @Injectable({
@@ -6,8 +6,8 @@ import { TodoItem } from '../interfaces/todo-item';
 })
 export class TodoListService {
   #todoList = signal<TodoItem[]>([]);
-
   todoList = this.#todoList.asReadonly();
+  #filter = signal<'all' | 'active' | 'completed'>('all');
 
   constructor() {}
 
@@ -53,6 +53,23 @@ export class TodoListService {
   reorderTodoList(updatedList: TodoItem[]) {
     this.#todoList.set(updatedList);
   }
+
+  setFilter(filter: 'all' | 'active' | 'completed') {
+    this.#filter.set(filter);
+  }
+
+  filteredTodoList = computed(() => {
+    const filter = this.#filter();
+    switch (filter) {
+      case 'active':
+        return this.#todoList().filter((todo) => !todo.isCompleted);
+      case 'completed':
+        return this.#todoList().filter((todo) => todo.isCompleted);
+      case 'all':
+      default:
+        return this.#todoList();
+    }
+  });
 
   private generateUniqueId(): string {
     return Math.random().toString(36).slice(2, 11);

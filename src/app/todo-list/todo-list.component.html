@@ -3,7 +3,7 @@
   <p>list is empty</p>
   } @else {
   <ul cdkDropList (cdkDropListDropped)="drop($event)">
-    @for (todo of todoList(); track todo.id) {
+    @for (todo of filteredTodos; track todo.id) {
     <li class="border-2 flex justify-between items-center gap-2" cdkDrag>
       <input
         type="checkbox"
@@ -31,7 +31,8 @@
   </ul>
   }
   <section>
-    <p>{{ todoList().length }} items left</p>
+    <p>Items left: {{ incompleteCount }}</p>
+
     <p (click)="clearCompleted()">Clear Completed</p>
   </section>
 </article>
