@@ -1,9 +1,15 @@
 <article class="w-max mx-auto mt-14">
-  <label for="todo-input" class="sr-only">Todo Input</label>
-  <input
-    type="text"
-    name="todo-input"
-    class="px-2 py-1 rounded-md"
-    placeholder="Add To Do Item..."
-  />
+  <form (ngSubmit)="onSubmit($event)">
+    <label for="todo-input" class="sr-only">Todo Input</label>
+    <input
+      type="text"
+      id="todo-input"
+      name="todo-input"
+      class="px-2 py-1 rounded-md"
+      placeholder="Add to do item..."
+      required
+      [(ngModel)]="taskText"
+      (keyup.enter)="onSubmit($event)"
+    />
+  </form>
 </article>
