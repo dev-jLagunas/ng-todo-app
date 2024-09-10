@@ -5,11 +5,20 @@ import { TodoItem } from '../interfaces/todo-item';
   providedIn: 'root',
 })
 export class TodoListService {
-  #todoList = signal<TodoItem[]>([]);
+  #todoList = signal<TodoItem[]>(this.loadFromLocalStorage());
   todoList = this.#todoList.asReadonly();
   #filter = signal<'all' | 'active' | 'completed'>('all');
 
   constructor() {}
+
+  private saveToLocalStorage() {
+    localStorage.setItem('todoList', JSON.stringify(this.#todoList()));
+  }
+
+  private loadFromLocalStorage(): TodoItem[] {
+    const savedList = localStorage.getItem('todoList');
+    return savedList ? JSON.parse(savedList) : [];
+  }
 
   addTodoItem(taskText: string) {
     const newTask: TodoItem = {
@@ -20,11 +29,13 @@ export class TodoListService {
     };
 
     this.#todoList.set([...this.#todoList(), newTask]);
+    this.saveToLocalStorage();
   }
 
   deleteTodoItem(id: string) {
     const updatedList = this.#todoList().filter((todo) => todo.id !== id);
     this.#todoList.set(updatedList);
+    this.saveToLocalStorage();
   }
 
   editTodoItem(id: string, updatedText: string) {
@@ -35,6 +46,7 @@ export class TodoListService {
     );
 
     this.#todoList.set(updatedList);
+    this.saveToLocalStorage();
   }
 
   toggleCompleted(id: string) {
@@ -43,15 +55,18 @@ export class TodoListService {
     );
 
     this.#todoList.set(updatedList);
+    this.saveToLocalStorage();
   }
 
   clearCompletedItems() {
     const updatedList = this.#todoList().filter((todo) => !todo.isCompleted);
     this.#todoList.set(updatedList);
+    this.saveToLocalStorage();
   }
 
   reorderTodoList(updatedList: TodoItem[]) {
     this.#todoList.set(updatedList);
+    this.saveToLocalStorage();
   }
 
   setFilter(filter: 'all' | 'active' | 'completed') {
