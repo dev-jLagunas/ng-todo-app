@@ -1,11 +1,24 @@
 <article class="rounded-t-md bg-slate-800 text-slate-50 h-max mt-4">
+  <!-- No items in the todo list display -->
   @if (!todoList().length) {
-  <p>list is empty</p>
+  <p class="text-center py-4 text-2xl tracking-widest">List is empty</p>
   } @else {
+  <!-- No completed items display -->
+  @if (currentFilter === 'completed' && !filteredTodos.length) {
+  <p class="text-center py-4 text-2xl tracking-widest">
+    No completed items yet, don't give up!
+  </p>
+  } @else if (currentFilter === 'active' && !filteredTodos.length) {
+  <!-- No active items display-->
+  <p class="text-center py-4 text-2xl tracking-widest">
+    Currently no active items
+  </p>
+  } @else {
+  <!-- Main todo list -->
   <ul cdkDropList (cdkDropListDropped)="drop($event)">
     @for (todo of filteredTodos; track todo.id) {
     <li
-      class="flex justify-between items-center gap-2 py-2 px-4 rounded-md"
+      class="flex justify-between items-center gap-2 py-2 px-4 rounded-md cursor-move"
       cdkDrag
     >
       <input
@@ -13,13 +26,17 @@
         (change)="toggleComplete(todo.id)"
         [checked]="todo.isCompleted"
       />
+
+      <!-- Editing mode -->
       @if (!todo.isEditing) {
       <span
         [class.task-completed]="todo.isCompleted"
         class="tracking-widest text-xs"
-        >{{ todo.taskText | uppercase }}</span
       >
-      } @else if (todo.isEditing) {
+        {{ todo.taskText | uppercase }}
+      </span>
+      } @else {
+      <!-- Editing Input-->
       <input
         type="text"
         [(ngModel)]="todo.taskText"
@@ -27,13 +44,16 @@
         class="text-slate-800"
       />
       }
+
       <div>
+        <!-- Edit/Cancel button -->
         <button
           (click)="todo.isEditing = !todo.isEditing"
           class="mr-4 text-amber-400"
         >
           {{ todo.isEditing ? "Cancel" : "Edit" }}
         </button>
+        <!-- Delete button -->
         <button (click)="deleteTodo(todo.id)" class="text-red-400">
           Delete
         </button>
@@ -41,13 +61,17 @@
     </li>
     }
   </ul>
-  }
+  } }
+
+  <!-- List Footer Section -->
   <section
     class="flex justify-between items-center px-4 py-4 border-t-4 border-double mt-8 border-slate-400"
   >
     <p class="text-sm">
       Items Remaining:
-      <span class="font-bold text-xl pl-1">{{ incompleteCount }}</span>
+      <span class="font-bold text-xl pl-1 text-emerald-400">{{
+        incompleteCount
+      }}</span>
     </p>
     <p
       (click)="clearCompleted()"

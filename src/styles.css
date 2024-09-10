@@ -32,6 +32,6 @@ body.dark {
 
 @media (width >= 768px) {
   body {
-    width: 75vw;
+    width: 55vw;
   }
 }

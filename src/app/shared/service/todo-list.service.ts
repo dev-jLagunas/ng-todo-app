@@ -89,4 +89,8 @@ export class TodoListService {
   private generateUniqueId(): string {
     return Math.random().toString(36).slice(2, 11);
   }
+
+  get currentFilter() {
+    return this.#filter();
+  }
 }

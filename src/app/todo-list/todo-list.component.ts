@@ -54,4 +54,8 @@ export class TodoListComponent {
   get filteredTodos() {
     return this.todoListService.filteredTodoList();
   }
+
+  get currentFilter() {
+    return this.todoListService.currentFilter;
+  }
 }
