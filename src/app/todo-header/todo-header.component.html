@@ -1,10 +1,13 @@
-<header
-  class="flex justify-between items-center mt-8 px-4 text-slate-50 pt-2 dark:text-red-500"
->
+<header class="flex justify-between items-center mt-8 px-4 text-slate-50 pt-2">
   <h1 class="text-3xl tracking-widest font-bold md:text-5xl">Todo App</h1>
   <button (click)="toggleTheme()">
-    <i class="theme-icon">{{
-      themeService.themeSignal() === "dark" ? "🌙" : "☀️"
-    }}</i>
+    <i
+      class="text-3xl"
+      [class]="
+        themeService.themeSignal() === 'dark'
+          ? 'fa-solid fa-moon'
+          : 'fa-solid fa-sun'
+      "
+    ></i>
   </button>
 </header>

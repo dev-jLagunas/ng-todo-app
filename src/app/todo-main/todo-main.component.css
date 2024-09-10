@@ -1,12 +1,4 @@
 .background-div {
-  background-image: linear-gradient(
-      to right,
-      rgba(12, 11, 11, 0.52),
-      rgba(117, 19, 93, 0.73)
-    ),
-    url("../../assets/images/todo-background.jpg");
-  background-size: cover;
-  background-position: center;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
     rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }

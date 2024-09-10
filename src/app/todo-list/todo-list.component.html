@@ -1,38 +1,59 @@
-<article>
+<article class="rounded-t-md bg-slate-800 text-slate-50 h-max mt-4">
   @if (!todoList().length) {
   <p>list is empty</p>
   } @else {
   <ul cdkDropList (cdkDropListDropped)="drop($event)">
     @for (todo of filteredTodos; track todo.id) {
-    <li class="border-2 flex justify-between items-center gap-2" cdkDrag>
+    <li
+      class="flex justify-between items-center gap-2 py-2 px-4 rounded-md"
+      cdkDrag
+    >
       <input
         type="checkbox"
         (change)="toggleComplete(todo.id)"
         [checked]="todo.isCompleted"
       />
       @if (!todo.isEditing) {
-      <span [class.task-completed]="todo.isCompleted">{{ todo.taskText }}</span>
+      <span
+        [class.task-completed]="todo.isCompleted"
+        class="tracking-widest text-xs"
+        >{{ todo.taskText | uppercase }}</span
+      >
       } @else if (todo.isEditing) {
       <input
         type="text"
         [(ngModel)]="todo.taskText"
         (keyup.enter)="editTodo(todo.id, todo.taskText)"
+        class="text-slate-800"
       />
       }
-
       <div>
-        <button (click)="todo.isEditing = !todo.isEditing">
+        <button
+          (click)="todo.isEditing = !todo.isEditing"
+          class="mr-4 text-amber-400"
+        >
           {{ todo.isEditing ? "Cancel" : "Edit" }}
         </button>
-        <button (click)="deleteTodo(todo.id)">Delete</button>
+        <button (click)="deleteTodo(todo.id)" class="text-red-400">
+          Delete
+        </button>
       </div>
     </li>
     }
   </ul>
   }
-  <section>
-    <p>Items left: {{ incompleteCount }}</p>
-
-    <p (click)="clearCompleted()">Clear Completed</p>
+  <section
+    class="flex justify-between items-center px-4 py-4 border-t-4 border-double mt-8 border-slate-400"
+  >
+    <p class="text-sm">
+      Items Remaining:
+      <span class="font-bold text-xl pl-1">{{ incompleteCount }}</span>
+    </p>
+    <p
+      (click)="clearCompleted()"
+      class="border px-2 hover:cursor-pointer rounded-md border-slate-400 py-1"
+    >
+      Clear Completed
+    </p>
   </section>
 </article>

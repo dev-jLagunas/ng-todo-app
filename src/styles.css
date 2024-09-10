@@ -23,6 +23,11 @@ GLOBAL STYLES
 body {
   width: 90vw;
   margin-inline: auto;
+  background-color: #1a3636;
+}
+
+body.dark {
+  background-color: #eeeeee;
 }
 
 @media (width >= 768px) {

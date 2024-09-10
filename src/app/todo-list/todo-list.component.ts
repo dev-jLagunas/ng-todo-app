@@ -9,11 +9,12 @@ import {
   moveItemInArray,
   DragDropModule,
 } from '@angular/cdk/drag-drop';
+import { UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-todo-list',
   standalone: true,
-  imports: [FormsModule, CdkDrag, CdkDropList, DragDropModule],
+  imports: [FormsModule, CdkDrag, CdkDropList, DragDropModule, UpperCasePipe],
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.css',
 })
