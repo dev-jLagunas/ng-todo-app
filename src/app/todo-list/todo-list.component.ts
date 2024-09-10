@@ -10,6 +10,7 @@ import {
   DragDropModule,
 } from '@angular/cdk/drag-drop';
 import { UpperCasePipe } from '@angular/common';
+import { ConfettiService } from '../shared/service/confetti.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -21,6 +22,7 @@ import { UpperCasePipe } from '@angular/common';
 export class TodoListComponent {
   todoList!: Signal<TodoItem[]>;
   todoListService = inject(TodoListService);
+  confettiService = inject(ConfettiService);
 
   constructor() {
     this.todoList = this.todoListService.todoList;
@@ -36,6 +38,11 @@ export class TodoListComponent {
 
   toggleComplete(id: string) {
     this.todoListService.toggleCompleted(id);
+
+    const task = this.todoListService.todoList().find((todo) => todo.id === id);
+    if (task?.isCompleted) {
+      this.confettiService.launchConfetti();
+    }
   }
 
   clearCompleted() {
